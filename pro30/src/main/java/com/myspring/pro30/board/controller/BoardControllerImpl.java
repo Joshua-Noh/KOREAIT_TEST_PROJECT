@@ -227,7 +227,6 @@ public class BoardControllerImpl  implements BoardController{
 	}
 	return resEnt;
   }  
-  
 /*
   //다중 이미지 글 추가하기
   @Override

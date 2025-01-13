@@ -100,10 +100,8 @@
 	<delete id="deleteArticle"  parameterType="int">
     <![CDATA[
       delete from t_board
-      where articleNO in (
-         SELECT articleNO FROM  t_board
-         START WITH articleNO = #{articleNO}
-         CONNECT BY PRIOR  articleNO = parentNO )
+      where articleNO = #{articleNO}
+         
     ]]>      
   </delete>
 
