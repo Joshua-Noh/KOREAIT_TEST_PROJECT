@@ -19,18 +19,8 @@
   <!-- CSS -->
  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
  <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
- <link href="css/style.css" rel="stylesheet">
+ <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
 </head>
-<script>
-	function fn_articleForm(isLogOn,articleForm,loginForm){
-	  if(isLogOn != '' && isLogOn != 'false'){
-	    location.href=articleForm;
-	  }else{
-	    alert("로그인 후 글쓰기가 가능합니다.")
-	    location.href=loginForm+'?action=/board/articleForm.do';
-	  }
-	}
-</script>
 <body>
 <h1>갤러리 게시판</h1>
 <c:choose>
@@ -44,16 +34,16 @@
     </tr>
   </c:when>
   <c:when test="${imageList !=null }" >
+    <div class="wrapper grid">
     <c:forEach  var="img" items="${imageList }" varStatus="articleNum" >
      
-     	<div class="wrapper grid">
             <div class="item">
-                <img src="${contextPath}/download.do?articleNO=${img.articleNO}&imageFileName=${img.imageFileName}" id="preview"  />
-                <p><c:out value="${article.title }"/></p>
+                <img width="150" height="150" src="${contextPath}/download.do?articleNO=${img.articleNO}&imageFileName=${img.imageFileName}" id="preview"  /><br>
+                <p><c:out value="${img.title }"/></p>
             </div>
-        </div>
      
     </c:forEach>
+    </div>
      </c:when>
     </c:choose>
 <!-- <a  class="cls1"  href="#"><p class="cls2">글쓰기</p></a> -->
