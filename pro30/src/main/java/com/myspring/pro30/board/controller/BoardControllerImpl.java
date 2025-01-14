@@ -354,17 +354,17 @@ public class BoardControllerImpl  implements BoardController{
 	
 */
 
-	
-
 	@RequestMapping(value = "/board/*Form.do", method = {RequestMethod.GET, RequestMethod.POST})
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		System.out.println("viewName : "+ viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		String parentNO = (String)request.getAttribute("parentNO");
+		String parentNO = (String)request.getParameter("parentNO");
+		System.out.println("parentNO : "+ parentNO);
 		if (parentNO != null && !parentNO.equals("")) {
-			mav.addObject("article", parentNO);
+			articleVO.setParentNO(Integer.parseInt(parentNO));
+			mav.addObject("article", articleVO);
 		}
 		return mav;
 	}
