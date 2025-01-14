@@ -70,6 +70,11 @@ public class BoardServiceImpl  implements BoardService{
 	}
 	
 	@Override
+	public void replyArticle(Map replyMap) throws Exception {
+		boardDAO.insertNewArticle(replyMap);
+	}
+	
+	@Override
 	public void removeArticle(int articleNO) throws Exception {
 		boardDAO.deleteArticle(articleNO);
 	}

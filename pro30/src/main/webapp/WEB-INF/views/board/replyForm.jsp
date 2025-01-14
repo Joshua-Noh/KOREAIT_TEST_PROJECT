@@ -38,7 +38,7 @@
     <table>
     <tr>
 			<td align="right"> 작성자:&nbsp; </td>
-			<td><input type="text" size="20" maxlength="100"  name="writer"></input> </td>
+			<td><input type="text" size="20" maxlength="100"  name="writer" ></input> </td>
 		</tr>
 		<tr>
 			<td align="right">제목:&nbsp;  </td>
