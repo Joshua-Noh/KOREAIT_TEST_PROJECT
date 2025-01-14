@@ -37,6 +37,10 @@
   <form name="frmReply" method="post"  action="${contextPath}/board/addReply.do"   enctype="multipart/form-data">
     <table>
     <tr>
+    		<td align="right"> 글번호:&nbsp; </td>
+			<td><input type="text"  name="parentNO" value="${article.parentNO }"  readOnly /></td>
+		</tr>
+    <tr>
 			<td align="right"> 작성자:&nbsp; </td>
 			<td><input type="text" size="20" maxlength="100"  name="writer" ></input> </td>
 		</tr>

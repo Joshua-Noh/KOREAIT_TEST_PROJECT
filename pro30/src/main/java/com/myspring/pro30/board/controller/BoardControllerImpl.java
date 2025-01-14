@@ -145,7 +145,7 @@ public class BoardControllerImpl  implements BoardController{
 		String imageFileName= upload(multipartRequest);
 		replyMap.put("imageFileName", imageFileName);
 		
-		String articleNO=(String)replyMap.get("articleNO");
+		String parentNO=(String)replyMap.get("parentNO");
 		String message;
 		ResponseEntity resEnt=null;
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -154,16 +154,16 @@ public class BoardControllerImpl  implements BoardController{
 	       boardService.replyArticle(replyMap);
 	       if(imageFileName!=null && imageFileName.length()!=0) {
 	         File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
-	         File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
+	         File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+parentNO);
 	         FileUtils.moveFileToDirectory(srcFile, destDir, true);
 	         
 	         String originalFileName = (String)replyMap.get("originalFileName");
-	         File oldFile = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO+"\\"+originalFileName);
+	         File oldFile = new File(ARTICLE_IMAGE_REPO+"\\"+parentNO+"\\"+originalFileName);
 	         oldFile.delete();
 	       }	
 	       message = "<script>";
 		   message += " alert('답글을 입력했습니다.');";
-		   message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+articleNO+"';";
+		   message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+parentNO+"';";
 		   message +=" </script>";
 	       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 	    }catch(Exception e) {
@@ -171,7 +171,7 @@ public class BoardControllerImpl  implements BoardController{
 	      srcFile.delete();
 	      message = "<script>";
 		  message += " alert('오류가 발생했습니다.다시 수정해주세요');";
-		  message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+articleNO+"';";
+		  message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+parentNO+"';";
 		  message +=" </script>";
 	      resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 	    }
@@ -362,6 +362,10 @@ public class BoardControllerImpl  implements BoardController{
 		System.out.println("viewName : "+ viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		String parentNO = (String)request.getAttribute("parentNO");
+		if (parentNO != null && !parentNO.equals("")) {
+			mav.addObject("article", parentNO);
+		}
 		return mav;
 	}
 
