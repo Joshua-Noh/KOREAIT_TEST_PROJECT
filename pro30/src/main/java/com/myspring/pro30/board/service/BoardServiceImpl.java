@@ -71,7 +71,7 @@ public class BoardServiceImpl  implements BoardService{
 	
 	@Override
 	public void replyArticle(Map replyMap) throws Exception {
-		boardDAO.insertNewArticle(replyMap);
+		boardDAO.insertReplyArticle(replyMap);
 	}
 	
 	@Override
