@@ -88,7 +88,7 @@
 								</c:otherwise>
 							</c:choose></td>
 						<td width="10%">${article.writeDate}</td>
-						<td><input type=button value="삭제하기"
+						<td width="10%"><input type=button value="삭제하기"
 							onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})"></td>
 					</tr>
 				</c:forEach>
