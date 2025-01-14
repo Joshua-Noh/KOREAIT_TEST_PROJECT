@@ -51,6 +51,7 @@ public class BoardControllerImpl  implements BoardController{
 		String viewName = (String)request.getAttribute("viewName");
 		List articlesList = boardService.listArticles();
 		ModelAndView mav = new ModelAndView(viewName);
+		//System.out.println("articlesList : "+ articlesList);
 		mav.addObject("articlesList", articlesList);
 		return mav;
 		
