@@ -42,6 +42,9 @@ public class BoardControllerImpl  implements BoardController{
 	@Autowired
 	private ArticleVO articleVO;
 	
+	@Autowired
+	private MemberVO memberVO;
+	
 	@Override
 	@RequestMapping(value= "/board/listArticles.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -362,9 +365,14 @@ public class BoardControllerImpl  implements BoardController{
 		mav.setViewName(viewName);
 		String parentNO = (String)request.getParameter("parentNO");
 		System.out.println("parentNO : "+ parentNO);
+		HttpSession session = request.getSession();
 		if (parentNO != null && !parentNO.equals("")) {
 			articleVO.setParentNO(Integer.parseInt(parentNO));
 			mav.addObject("article", articleVO);
+			
+			// 세션에서 가져오기
+			memberVO = (MemberVO) session.getAttribute("member");
+			mav.addObject("memberSessionVO", memberVO);
 		}
 		return mav;
 	}

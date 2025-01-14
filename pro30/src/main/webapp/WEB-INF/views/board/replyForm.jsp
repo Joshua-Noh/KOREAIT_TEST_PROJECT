@@ -7,7 +7,6 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %> 
-
 <head>
 <meta charset="UTF-8">
  <script src="//code.jquery.com/jquery-3.3.1.js"></script> 
@@ -36,13 +35,18 @@
  <h1>답글쓰기</h1>
   <form name="frmReply" method="post"  action="${contextPath}/board/addReply.do"   enctype="multipart/form-data">
     <table>
-    <tr>
+    	<tr>
     		<td align="right"> 글번호:&nbsp; </td>
 			<td><input type="text"  name="parentNO" value="${article.parentNO }"  readOnly /></td>
 		</tr>
-    <tr>
-			<td align="right"> 작성자:&nbsp; </td>
-			<td><input type="text" size="20" maxlength="100"  name="writer" ></input> </td>
+    	<tr>
+			<td align="right"> 작성자:&nbsp; (세션 아이디) </td>
+			<td><input type="text" size="20" maxlength="100"  name="id" value="${memberSessionVO.id}"></input> <br>
+			 	<c:out value="${memberSessionVO.pwd}" /><br>
+			 	<c:out value="${memberSessionVO.name}" /><br>
+			 	<c:out value="${memberSessionVO.email}" /><br>
+			 	<c:out value="${memberSessionVO.joinDate}" /><br>
+			 </td>
 		</tr>
 		<tr>
 			<td align="right">제목:&nbsp;  </td>
