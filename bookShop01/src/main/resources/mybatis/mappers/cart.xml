@@ -58,11 +58,14 @@
 
 	<select id="selectCountInCart" resultType="String" parameterType="cartVO">
 	    <![CDATA[
-		    select decode(count(*), 0, 'false', 'true') from t_shopping_cart
+	    	SELECT IF(COUNT(*) = 0, 'false', 'true') AS result
+			FROM t_shopping_cart
+			WHERE goods_id = #{goods_id}
+			AND member_id = #{member_id};    
+    	]]><!-- 오라클 소스 decode
+    	 select decode(count(*), 0, 'false', 'true') from t_shopping_cart
 			where goods_id=#{goods_id}
-			  and member_id=#{member_id} 
-
-    	]]>
+			  and member_id=#{member_id}  -->
 	</select>
 
 	<insert id="insertGoodsInCart" parameterType="cartVO">
@@ -93,7 +96,7 @@
 	
 	<select id="selectMaxCartId" resultType="int">
 	    <![CDATA[
-			select nvl(max(cart_id), 0) + 1 from t_shopping_cart 
+			select IFNULL(max(cart_id), 0) + 1 from t_shopping_cart 
     	]]>
 	</select>
 
