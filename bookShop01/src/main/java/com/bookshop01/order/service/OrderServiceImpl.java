@@ -25,6 +25,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	public void addNewOrder(List<OrderVO> myOrderList) throws Exception{
+		orderDAO.insertOrderSequence();
 		orderDAO.insertNewOrder(myOrderList);
 		//카트에서 주문 상품 제거한다.
 		orderDAO.removeGoodsFromCart(myOrderList);

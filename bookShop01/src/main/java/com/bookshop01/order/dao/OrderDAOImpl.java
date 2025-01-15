@@ -21,6 +21,11 @@ public class OrderDAOImpl implements OrderDAO {
 		return orderGoodsList;
 	}
 	
+	public void insertOrderSequence() throws DataAccessException{
+		
+		sqlSession.insert("mapper.order.insertOrderSequence");
+	}	
+	
 	public void insertNewOrder(List<OrderVO> myOrderList) throws DataAccessException{
 		int order_id=selectOrderID();
 		for(int i=0; i<myOrderList.size();i++){
@@ -47,6 +52,7 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}	
 	private int selectOrderID() throws DataAccessException{
+		insertOrderSequence();
 		return sqlSession.selectOne("mapper.order.selectOrderID");
 		
 	}

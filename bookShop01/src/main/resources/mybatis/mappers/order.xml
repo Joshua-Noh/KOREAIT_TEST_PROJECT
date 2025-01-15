@@ -50,13 +50,19 @@
         	order by pay_order_time desc
 		]]>
 	</select>
+	
+	<insert id="insertOrderSequence" >
+		INSERT INTO order_sequence VALUES (NULL)
+	</insert>
+	
 	<insert id="insertNewOrder" parameterType="orderVO"  >
 	    <selectKey resultType="int" keyProperty="order_seq_num" order="BEFORE">
-	    	select order_seq_num.nextval from dual
+	    	<!-- 오라클 시퀀스 쿼리 : select order_seq_num.nextval from dual -->
+        	SELECT LAST_INSERT_ID()
 	    </selectKey>
 	    <![CDATA[
 			insert into t_shopping_order(order_seq_num,
-			                            order_id,
+			                            order_id,	
 										  member_id,
 									    goods_id,
 									    goods_title,
@@ -110,8 +116,9 @@
 
    <select id="selectOrderID" resultType="int"  >
 	    <![CDATA[
-		    select seq_order_id.nextval from dual
+        	SELECT LAST_INSERT_ID()
     	]]>
+    	<!-- select seq_order_id.nextval from dual -->
 	</select>
 	
 	<select id="selectMyOrder" resultMap="orderGoodsResult"   parameterType="String"  >
