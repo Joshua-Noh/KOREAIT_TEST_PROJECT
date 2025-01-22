@@ -51,6 +51,20 @@
 	   id=#{id}
 	]]>      
   </delete>
+  
+  <select id="idCheckMember"  resultType="boolean"   parameterType="String" >
+	<![CDATA[
+		SELECT CASE 
+           WHEN EXISTS (
+               SELECT 1 
+               FROM t_member 
+               WHERE id = #{id}
+           ) 
+           THEN true 
+           ELSE false 
+       END AS result
+	]]>
+  </select>
   <select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
 	<![CDATA[
 		select * from t_member	
