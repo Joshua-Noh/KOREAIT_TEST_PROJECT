@@ -37,6 +37,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public boolean idCheck(String id) throws DataAccessException {
+		return memberDAO.idCheck(id);
+	}
+	
+	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception{
 		return memberDAO.loginById(memberVO);
 	}

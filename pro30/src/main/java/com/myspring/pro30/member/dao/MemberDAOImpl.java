@@ -35,6 +35,12 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
+	public boolean idCheck(String id) throws DataAccessException {
+		boolean result = sqlSession.selectOne("mapper.member.idCheckMember", id);
+		return result;
+	}
+	
+	@Override
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException{
 		  MemberVO vo = sqlSession.selectOne("mapper.member.loginById",memberVO);
 		return vo;

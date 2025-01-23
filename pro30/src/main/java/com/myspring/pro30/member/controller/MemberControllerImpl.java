@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -135,6 +136,29 @@ public class MemberControllerImpl   implements MemberController {
 	}
 	
 
+	@RequestMapping(value="/member/idCheck.do" ,method = RequestMethod.POST)
+	public ResponseEntity<String> idCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ResponseEntity<String> resEntity = null;
+		
+		try {
+			String id = (String) request.getParameter("id"); 
+			System.out.println("id = " + id);
+			boolean overlappedID = memberService.idCheck(id);
+
+			if (overlappedID == true) {
+				resEntity = new ResponseEntity("not_usable", HttpStatus.OK);
+			} else {
+				resEntity = new ResponseEntity("usable", HttpStatus.OK);
+			}
+			
+		}catch(Exception e) {
+			resEntity = new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return resEntity;
+	}
+	
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
