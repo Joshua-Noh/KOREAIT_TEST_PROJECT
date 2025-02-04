@@ -9,8 +9,24 @@ public class ViewNameInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 		try {
+			 // 뷰 이름 설정
 			String viewName = getViewName(request);
 			request.setAttribute("viewName", viewName);
+        	
+        	// 로그인 페이지는 인증 로직 제외
+//            String uri = request.getRequestURI();
+//            if (uri.endsWith("/member/loginForm.do") || uri.endsWith("/member/login.do")) {
+//                return true; // 인증 검사 건너뛰기
+//            }
+        	
+			// 인증/인가 로직 추가
+//            Object member = request.getSession().getAttribute("member"); // 세션에서 사용자 정보 가져오기
+//            if (member == null) {
+//                // 인증 실패: 로그인 페이지로 리다이렉트
+//                response.sendRedirect(request.getContextPath() + "/member/loginForm.do");
+//                return false; // 요청 차단
+//            }
+//           
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
