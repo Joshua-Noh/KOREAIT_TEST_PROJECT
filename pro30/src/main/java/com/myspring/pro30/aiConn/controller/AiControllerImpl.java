@@ -26,7 +26,9 @@ public class AiControllerImpl implements AiController{
 	public ModelAndView fetchData() {
 		
         // REST API 호출
-        String url = "http://localhost:5000/api/data";
+        //String url = "http://localhost:5000/api/data";
+        String url = "https://kduaro124.pythonanywhere.com/api/data";
+        
         RestTemplate restTemplate = new RestTemplate();
         
         ModelAndView mav = new ModelAndView("/ai/data-view");
@@ -52,7 +54,7 @@ public class AiControllerImpl implements AiController{
 	    String[] cities = request.getParameterValues("cities"); // form에서 넘어온 값
 
 	    // Flask API URL
-	    String url = "http://localhost:5000/api/listData";
+	    String url = "https://kduaro124.pythonanywhere.com/api/listData";
 
 	    // 도시 리스트 만들기
 	    List<String> cityList = (cities != null) ? Arrays.asList(cities) : Arrays.asList("서울", "대구");
@@ -103,7 +105,9 @@ public class AiControllerImpl implements AiController{
 	
 	// 내부에서 호출할 수 있는 GET 요청 처리 메서드
     public List<Map<String, Object>> fetchBasicData() {
-        String getUrl = "http://localhost:5000/api/data";
+        //String getUrl = "http://localhost:5000/api/data";
+        String getUrl = "https://kduaro124.pythonanywhere.com/api/data";
+        
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(getUrl, List.class);
     }
