@@ -41,17 +41,18 @@ public class ArticleController {
     System.out.println("saved.toString() ::: " + saved.toString());
     log.info("saved.toString() ::: " + saved.toString());
 
-    return "";
+    return "redirect:/articles/" + saved.getId();
   }
   
   @GetMapping("/articles/{id}")
   public String show(@PathVariable Long id, Model model){  // 매개변수 id 받아 오기
     log.info("id = "+ id);
     // 1. id를 조회해 데이터 가져오기
-    Optional<Article> articleEntity = Optional.ofNullable(articleRepository.findById(id).orElse(null));
-
+    //Optional<Article> articleEntity = Optional.ofNullable(articleRepository.findById(id).orElse(null));
+    Optional<Article> articleEntity = articleRepository.findById(id);
+    log.info("articleEntity.toString() : "+ articleEntity.toString());
     // 2. 모델에 데이터를 등록하기
-    model.addAttribute("article", articleEntity);
+    model.addAttribute("article", articleEntity.get());
 
     // 3. 뷰 페이지에 반환하기
     return "articles/show";
