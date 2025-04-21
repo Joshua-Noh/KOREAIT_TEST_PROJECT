@@ -18,7 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Controller
+
+
 public class ArticleController {
   @Autowired  // 스프링부트가 미리 생성해 놓은 리파지터리 객체 주입(DI)
   private ArticleRepository articleRepository;
@@ -110,3 +111,4 @@ public class ArticleController {
   }
 
 }
+
